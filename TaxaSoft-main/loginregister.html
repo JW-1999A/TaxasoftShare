@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login und Registrierung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login / Registrierung</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Benutzername" required>
+            <input type="password" id="password" placeholder="Passwort" required>
+            <button type="button" id="loginButton">Anmelden</button>
+            <button type="button" id="registerButton">Registrieren</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginButton').addEventListener('click', function() {
+            sendRequest('/login');
+        });
+
+        document.getElementById('registerButton').addEventListener('click', function() {
+            sendRequest('/register');
+        });
+
+        function sendRequest(url) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: username, password: password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(url === '/login' ? 'Login erfolgreich!' : 'Registrierung erfolgreich!');
+                    if (url === '/login') {
+                        window.location.href = '/dashboard.html';
+                    }
+                } else {
+                    alert(url === '/login' ? 'Login fehlgeschlagen.' : 'Registrierung fehlgeschlagen.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

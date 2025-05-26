@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxaSoft Fahrer-App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/driver.css">
+</head>
+<body>
+    <div class="driver-container">
+        <header class="driver-header">
+            <h1>TaxaSoft Fahrer</h1>
+            <div class="status-toggle">
+                <button id="statusBtn" class="btn btn-success">Online</button>
+            </div>
+        </header>
+        
+        <div id="currentOrder" class="order-panel">
+            <h2>Aktueller Auftrag</h2>
+            <div id="orderDetails"></div>
+        </div>
+
+        <div id="driverMap" class="map-container"></div>
+
+        <footer class="driver-footer">
+            <button id="acceptBtn" class="btn btn-primary" style="display: none;">Auftrag annehmen</button>
+            <button id="completeBtn" class="btn btn-success" style="display: none;">Fahrt abschließen</button>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/driver.js"></script>
+</body>
+</html>
